@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>To-Do List</title>
+	<script src="../js/template.js"></script>
+	<link href="../images//to-do-list.png" rel="icon" type="image/png">
+	<link href="../scss/styles.css" rel="stylesheet">
+</head>
+<body>
+	<h1 style="text-align: center;">To-Do List</h1>
+	<div class="kanban">
+
+		<div class="input-holder" style="text-align: center;">
+			<input class="add-input" type="text" id="add-task" placeholder="Add task to To-Do list" minlength="1">
+			<script>
+				const input = document.querySelector('#add-task');
+				input.addEventListener('keydown', (e) => {
+  					if (e.key === 'Enter') {
+    					addTask();
+					}
+				});
+			</script>
+			<button class="add-btn" onclick="addTask()">Add</button>
+		</div>
+
+		<div class="lists">
+			<div class="todo" style="border: 1px solid red;" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;">To-Do</p>
+				<hr style="border: 0.5px dashed red;">
+				<ul class="todo-items">
+	
+				</ul>
+			</div>
+
+			<div class="progress" style="border: 1px solid orange;" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;">In Progress</p>
+				<hr style="border: 0.5px dashed orange;">
+				<ul class="progress-items">
+
+				</ul>
+			</div>
+
+			<div class="done" style="border: 1px solid rgb(46, 160, 46);" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;">Done</p>
+				<hr style="border: 0.5px dashed rgb(46, 160, 46);">
+				<ul class="done-items">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<audio id="error" src="../audio/error.mp3" preload="auto"></audio>
+</body>
+</html>

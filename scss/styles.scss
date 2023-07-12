@@ -1,0 +1,134 @@
+$primary-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+$primary-radius: 5px;
+
+body {
+	font-family: $primary-font;
+	border-radius: $primary-radius;
+}
+
+.add-input {
+	border-radius: $primary-radius;
+	border: 1px solid black;
+	padding: 0.16%;
+}
+
+.add-btn {
+	border-radius: $primary-radius;
+	border: 1px solid black;
+	background: rgba(211, 211, 211, 0.354);
+	padding: 2px;
+	&:hover{
+		background-color: darkgray;
+		color: white;
+	}
+	&:active {
+		background-color: gray;
+		color: white;
+	}
+}
+
+.remove {
+	border: 1px dashed darkred;
+	border-radius: $primary-radius;
+	background: none;
+	max-height: 20px;
+	&:hover {
+		background-color: darkred;
+		color: white;
+	}
+
+	&:active {
+		background-color: red;
+		color: white;
+	}
+}
+
+.edit {
+	border: 1px dashed darkorange;
+	border-radius: $primary-radius;
+	background: none;
+	margin-left: auto;
+	max-height: 20px;
+	&:hover {
+		background-color: darkgoldenrod;
+		color: white;
+	}
+
+	&:active {
+		background-color: orange;
+		color: white;
+	}
+}
+
+.kanban {
+	border-radius: $primary-radius;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 2px solid black;
+	padding: 0.8%;
+	height: 84vh;
+	min-height: 400px;
+}
+
+
+.lists {
+	margin-top: 0.4%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	height: 80vh;
+	min-height: 350px;
+}
+
+.todo, .progress, .done {
+	border-radius: $primary-radius;
+	width: 32%;
+}
+
+.todo, .progress {
+	ul {
+		li {
+			overflow: auto;
+			background-color: rgba(59, 168, 205, 0.208);
+		}
+	}
+}
+
+.done {
+	ul {
+		li {
+			overflow: auto;
+			background-color: rgba(46, 46, 46, 0.208);
+		}
+	}
+}
+
+.complete {
+	text-decoration: line-through;
+}
+
+@mixin items {
+	border-radius: $primary-radius;
+	list-style: none;
+	justify-content: space-between;
+	margin-top: 3%;
+	padding: 0;
+	min-height: 250px;
+	height: 70vh;
+	overflow-y: auto;
+	li {
+		margin: 2%;
+		border: 1px solid black;
+		border-radius: $primary-radius;
+		display: flex;
+  		flex-direction: row;
+  		justify-content: space-between;
+		padding: 1%;
+	}
+}
+
+.todo-items, .progress-items, .done-items {
+	@include items;
+}
