@@ -110,7 +110,7 @@ const containsTask = (taskName, taskList) => {
 
 const findIndex = (taskName, taskList) => {
 	for (let i = 0; i < taskList.length; i++) {
-		if (taskList[i].innerHTML.includes(taskName)) {
+		if (taskList[i].querySelector('.task-name').textContent === taskName) {
 			return i;
 		}
 	}
@@ -134,9 +134,7 @@ const drop = (e) => {
 			newTask.innerHTML = `<span class="task-name">${data["value"]}</span><button class="edit" onclick="editTask('.todo-items')">Edit</button><button class="remove" onclick="removeTask('.todo-items')">Remove</button>`;
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
-			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);
-			storeTasks();
-
+			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);	
 		} else if (target.className === 'progress-items') {
 			const newTask = document.createElement('li');
 			newTask.draggable = true;
@@ -146,7 +144,6 @@ const drop = (e) => {
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
 			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);
-			storeTasks();
 		} else if (target.className === 'done-items') {
 			const newTask = document.createElement('li');
 			newTask.draggable = true;
@@ -156,13 +153,13 @@ const drop = (e) => {
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
 			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);
-			storeTasks();
 		} else {
 			document.getElementById("error").play();
 			alert("Drop target not found!");
 			return;
 		}
 	}
+	storeTasks();
 };
 
 const storeTasks = () => {
