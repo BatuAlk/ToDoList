@@ -48,6 +48,7 @@ const editTask = (itemList) => {
 				const edit = li.children[1];
 				const remove = li.children[2];
 				const input = document.createElement('input');
+				li.draggable = false;
 				input.className = 'edit-input';
 				input.type = 'text';
 				input.value = span.innerHTML;
@@ -72,6 +73,7 @@ const editTask = (itemList) => {
 				li.appendChild(saveButton);
 				li.appendChild(cancelButton);
 				saveButton.addEventListener('click', () => {
+					li.draggable = true;
 					const newTaskName = input.value;
 					if (newTaskName === "") {
 						document.getElementById("error").play();
@@ -101,6 +103,7 @@ const editTask = (itemList) => {
 				});
 
 				cancelButton.addEventListener('click', () => {
+					li.draggable = true;
 					li.removeChild(input);
 					li.removeChild(saveButton);
 					li.removeChild(cancelButton);
