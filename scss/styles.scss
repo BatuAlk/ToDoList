@@ -1,67 +1,155 @@
 $primary-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-$primary-radius: 5px;
+$primary-radius: 7px;
 
 body {
 	font-family: $primary-font;
 	border-radius: $primary-radius;
 }
 
+h1 {
+	text-align: center;
+	background: linear-gradient(to right, red, goldenrod, rgb(0, 255, 0));
+  	background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
 .add-input {
 	border-radius: $primary-radius;
+	width: 30%;
 	border: 1px solid black;
-	padding: 0.16%;
+	padding: 9px;
+	margin: 5px 0;
+	outline: none;
+	transition: 0.5s;
+
+	&:focus {
+		border: 1px solid rgb(0, 85, 255);
+		box-shadow: 0 0 3px rgb(0, 85, 255);
+	}
 }
 
 .add-btn {
 	border-radius: $primary-radius;
-	border: 1px solid black;
-	background: rgba(211, 211, 211, 0.354);
-	padding: 2px;
+	border: none;
+	background-color: rgb(20, 92, 209);
+	color: white;
+	padding: 10px;
+	transition: 0.5s;
+	box-shadow: 0 0 3px rgb(0, 85, 255);
+
 	&:hover{
-		background-color: darkgray;
-		color: white;
+		background-color: rgb(17, 68, 180);
 	}
 	&:active {
-		background-color: gray;
-		color: white;
+		background-color: rgb(2, 56, 157);
 	}
 }
 
 .remove {
-	border: 1px dashed darkred;
+	border:none;
 	border-radius: $primary-radius;
-	background: none;
-	max-height: 20px;
+	background: rgba(163, 0, 0, 0.862);
+	box-shadow: 0 0 3px rgba(195, 3, 3, 0.767);
+	max-height: 35px;
+	color: white;
+	transition: 0.5s;
+	font-size: small;
+	padding: 9px;
+	margin-right: 5px;
 	&:hover {
-		background-color: darkred;
-		color: white;
+		background-color: rgb(111, 0, 0);
 	}
 
 	&:active {
 		background-color: red;
-		color: white;
 	}
 }
 
+.task-name {
+	margin: 5px 7px;
+}
+
 .edit {
-	border: 1px dashed darkorange;
+	border: none;
 	border-radius: $primary-radius;
-	background: none;
+	background: goldenrod;
+	box-shadow: 0 0 3px rgba(223, 161, 5, 0.984);
 	margin-left: auto;
-	max-height: 20px;
+	margin-right: 7px;
+	max-height: 35px;
+	transition: 0.5s;
+	font-size: small;
+	padding: 9px;
+	color: white;
 	&:hover {
-		background-color: darkgoldenrod;
-		color: white;
+		background-color: darkgoldenrod;	
 	}
 
 	&:active {
 		background-color: orange;
-		color: white;
+	}
+}
+
+.edit-input {
+	border-radius: $primary-radius;
+	width: 50%;
+	border: 1px solid black;
+	padding: 8px;
+	margin: 5px 7px;
+	outline: none;
+	transition: 0.5s;
+
+	&:focus {
+		border: 1px solid rgb(255, 85, 0);
+		box-shadow: 0 0 3px rgb(255, 85, 0);
+	}
+}
+
+.save {
+	border: none;
+	border-radius: $primary-radius;
+	background: green;
+	box-shadow: 0 0 3px rgba(0, 130, 0, 0.767);
+	max-height: 35px;
+	color: white;
+	transition: 0.5s;
+	font-size: small;
+	padding: 9px;
+	margin-right: 7px;
+	margin-left: auto;
+	&:hover {
+		background-color: rgb(0, 111, 0);
+	}
+
+	&:active {
+		background-color: darkgreen;
+	}
+}
+
+.cancel {
+	border: none;
+	border-radius: $primary-radius;
+	background-color: rgb(170, 0, 0);
+	box-shadow: 0 0 3px rgba(163, 0, 0, 0.767);
+	max-height: 35px;
+	color: white;
+	transition: 0.5s;
+	font-size: small;
+	padding: 9px;
+	margin-right: 5px;
+	&:hover {
+		background-color: rgb(111, 0, 0);
+	}
+
+	&:active {
+		background-color: red;
 	}
 }
 
 .kanban {
 	border-radius: $primary-radius;
+	background-color: rgba(0, 30, 122, 0.056);
+	box-shadow: 2px 0 2px rgb(19, 19, 19);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -70,7 +158,6 @@ body {
 	height: 84vh;
 	min-height: 400px;
 }
-
 
 .lists {
 	margin-top: 0.4%;
@@ -90,8 +177,7 @@ body {
 .todo, .progress {
 	ul {
 		li {
-			overflow: auto;
-			background-color: rgba(59, 168, 205, 0.208);
+			background-color: rgba(255, 255, 255, 0.593);
 		}
 	}
 }
@@ -99,10 +185,37 @@ body {
 .done {
 	ul {
 		li {
-			overflow: auto;
-			background-color: rgba(46, 46, 46, 0.208);
+			background-color: rgba(0, 57, 7, 0.289);
 		}
 	}
+}
+
+.todo {
+	border: 1px solid rgba(255, 0, 0, 0.6);
+	background-color: rgba(236, 10, 10, 0.117);
+	box-shadow: 0 0 3px rgba(255, 0, 0, 0.6);
+}
+
+.progress {
+	border: 1px solid rgba(255, 255, 0, 0.6);
+	background-color: rgba(255, 255, 0, 0.164);
+	box-shadow: 0 0 3px rgba(255, 255, 0, 0.6);
+}
+
+.done {
+	border: 1px solid rgba(0, 255, 0, 0.6);
+	background-color: rgba(0, 255, 0, 0.164);
+	box-shadow: 0 0 3px rgba(0, 255, 0, 0.6);
+}
+
+li {
+	align-items: center;
+	display: flex;
+  	flex-direction: row;
+  	justify-content: space-between;
+	overflow: auto;
+	min-height: 40px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }
 
 .complete {

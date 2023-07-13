@@ -1,11 +1,9 @@
 const addTask = () => {
-	const addBtn = document.querySelector('.add-btn');
 	const input = document.querySelector('#add-task');
 	const todoList = document.querySelector('.todo-items');
 	const taskName = input.value;
+
 	if (taskName === "") {
-		document.getElementById("error").play();
-		alert("Please enter a task name!");
 		return;
 	} else if (containsTask(taskName, todoList.getElementsByTagName('span'))) {
 		document.getElementById("error").play();
@@ -23,28 +21,18 @@ const addTask = () => {
 	}
 };
 
-const listType = (itemList) => {
-	if (itemList === 'todo-items') {
-		return 'todo';
-	} else if (itemList === 'progress-items') {
-		return 'progress';
-	} else if (itemList === 'done-items') {
-		return 'done';
-	} else {
-		alert("Item list not found!");
-		return;
-	}
-}
-
 const removeTask = (itemList) => {
 	const list = document.querySelector(itemList);
     const removeItem = (e) => {
-        if (e.target.classList.contains('remove')) {
-			const li = e.target.parentElement;
-            list.removeChild(li);
-			list.removeEventListener('click', removeItem);
-			storeTasks();
+		if (e.target.classList.contains('remove')) {
+			const conf = "Are you sure you want to remove this task? Press 'OK' to remove or 'Cancel' to cancel.";
+			if (confirm(conf)) {
+				const li = e.target.parentElement;
+				list.removeChild(li);
+				storeTasks();
+			}
 		}
+		list.removeEventListener('click', removeItem);
     };
 	list.addEventListener('click', removeItem);
 }
@@ -57,28 +45,74 @@ const editTask = (itemList) => {
 			if (e.target.classList.contains('edit')) {
 				const li = e.target.parentElement;
 				const span = li.children[0];
-				const newTaskName = prompt("Enter new task name:");
-				if (newTaskName === null) {
-					newTaskName = span.innerHTML;
-					storeTasks();
-					return;
-				}
-				if (newTaskName === "") {
-					document.getElementById("error").play();
-					alert("Please enter a task name!");
-					list.removeEventListener('click', editItem);
-					return;
-				} else if (containsTask(newTaskName, list.getElementsByTagName('span'))) {
-					document.getElementById("error").play();
-					alert("Task already exists!");
-					list.removeEventListener('click', editItem);
-					return;
-				} else {
-					span.innerHTML = newTaskName;
+				const edit = li.children[1];
+				const remove = li.children[2];
+				const input = document.createElement('input');
+				input.className = 'edit-input';
+				input.type = 'text';
+				input.value = span.innerHTML;
+				li.insertBefore(input, span);
+				li.removeChild(span);
+				li.removeChild(edit);
+				li.removeChild(remove);
+				input.focus();
+
+				const saveButton = document.createElement('button');
+				saveButton.className = 'save';
+				saveButton.innerHTML = 'Save';
+				const cancelButton = document.createElement('button');
+				cancelButton.className = 'cancel';
+				cancelButton.innerHTML = 'Cancel';
+				const editButtons = document.querySelectorAll('.edit');
+				editButtons.forEach((button) => {
+					button.disabled = true;
+					button.style.background = 'gray';
+				});
+
+				li.appendChild(saveButton);
+				li.appendChild(cancelButton);
+				saveButton.addEventListener('click', () => {
+					const newTaskName = input.value;
+					if (newTaskName === "") {
+						document.getElementById("error").play();
+						alert("Please enter a task name!");
+						edited = true;
+						return;
+					} else if (containsTask(newTaskName, list.getElementsByTagName('span'))) {
+						document.getElementById("error").play();
+						alert("Task already exists!");
+						edited = true;
+						return;
+					} else {
+						span.innerHTML = newTaskName;
+						li.removeChild(input);
+						li.removeChild(saveButton);
+						li.removeChild(cancelButton);
+						li.appendChild(span);
+						li.appendChild(edit);
+						li.appendChild(remove);
+						editButtons.forEach((button) => {
+							button.disabled = false;
+							button.style.background = 'goldenrod';
+						});
+						edited = true;
+						storeTasks();
+					}
+				});
+
+				cancelButton.addEventListener('click', () => {
+					li.removeChild(input);
+					li.removeChild(saveButton);
+					li.removeChild(cancelButton);
+					li.appendChild(span);
+					li.appendChild(edit);
+					li.appendChild(remove);
+					editButtons.forEach((button) => {
+						button.disabled = false;
+						button.style.background = 'goldenrod';
+					});
 					edited = true;
-					storeTasks();
-					return;
-				}
+				});
 			}
 		}
 	};
@@ -135,6 +169,7 @@ const drop = (e) => {
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
 			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);	
+
 		} else if (target.className === 'progress-items') {
 			const newTask = document.createElement('li');
 			newTask.draggable = true;
@@ -144,6 +179,7 @@ const drop = (e) => {
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
 			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);
+
 		} else if (target.className === 'done-items') {
 			const newTask = document.createElement('li');
 			newTask.draggable = true;
@@ -153,6 +189,7 @@ const drop = (e) => {
 			target.appendChild(newTask);
 			const oldList = document.querySelector(`.${data["itemList"]}`);
 			oldList.removeChild(oldList.children[findIndex(data["value"], oldList.children)]);
+
 		} else {
 			document.getElementById("error").play();
 			alert("Drop target not found!");
@@ -192,5 +229,8 @@ window.onload = () => {
 
   	todoItems.forEach(taskName => addTaskToList(taskName, 'todo'));
   	progressItems.forEach(taskName => addTaskToList(taskName, 'progress'));
-  	doneItems.forEach(taskName => addTaskToList(taskName, 'done'));
+	doneItems.forEach(taskName => addTaskToList(taskName, 'done'));
+	
+	const addButton = document.querySelector('.add-input');
+	addButton.focus();
 }

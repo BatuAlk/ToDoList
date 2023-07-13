@@ -9,11 +9,11 @@
 	<link href="../scss/styles.css" rel="stylesheet">
 </head>
 <body>
-	<h1 style="text-align: center;">To-Do List</h1>
+	<h1>To-Do List</h1>
 	<div class="kanban">
 
 		<div class="input-holder" style="text-align: center;">
-			<input class="add-input" type="text" id="add-task" placeholder="Add task to To-Do list" minlength="1">
+			<input class="add-input" type="text" id="add-task" placeholder="Add your task to the To-Do list" minlength="1">
 			<script>
 				const input = document.querySelector('#add-task');
 				input.addEventListener('keydown', (e) => {
@@ -26,24 +26,24 @@
 		</div>
 
 		<div class="lists">
-			<div class="todo" style="border: 1px solid red;" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<p style="text-align: center;">To-Do</p>
+			<div class="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;"><b>To-Do</b></p>
 				<hr style="border: 0.5px dashed red;">
 				<ul class="todo-items">
 	
 				</ul>
 			</div>
 
-			<div class="progress" style="border: 1px solid orange;" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<p style="text-align: center;">In Progress</p>
+			<div class="progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;"><b>In Progress</b></p>
 				<hr style="border: 0.5px dashed orange;">
 				<ul class="progress-items">
 
 				</ul>
 			</div>
 
-			<div class="done" style="border: 1px solid rgb(46, 160, 46);" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<p style="text-align: center;">Done</p>
+			<div class="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<p style="text-align: center;"><b>Done</b></p>
 				<hr style="border: 0.5px dashed rgb(46, 160, 46);">
 				<ul class="done-items">
 					
