@@ -6,4 +6,4 @@ Features:
 * Delete tasks
 * Changes are stored in localStorage
 
-<img width="1389" alt="Screenshot 2023-07-13 at 18 23 24" src="https://github.com/BatuAlk/ToDoList/assets/108514496/5e172eb3-8854-48f5-8f57-d8a6150ac490">
+<img width="938" alt="to-do list webpage image" src="https://github.com/BatuAlk/ToDoList/assets/108514496/0df8190e-d26c-4420-983f-6d826be9b34a">
